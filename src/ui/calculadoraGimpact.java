@@ -1,7 +1,7 @@
 package ui;
 
 import java.util.*;
-//estoy empezando cambios
+//cambio 1
 public class calculadoraGimpact {
 
     public static Scanner txt = new Scanner(System.in);
