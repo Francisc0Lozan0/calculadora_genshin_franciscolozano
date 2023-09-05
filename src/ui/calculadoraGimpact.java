@@ -1,7 +1,6 @@
 package ui;
 
 import java.util.*;
-//cambio 1
 
 public class calculadoraGimpact {
 
