@@ -2,6 +2,7 @@ package ui;
 
 import java.util.*;
 //cambio 1
+
 public class calculadoraGimpact {
 
     public static Scanner txt = new Scanner(System.in);
@@ -13,7 +14,7 @@ public class calculadoraGimpact {
 
     /*
      * aleatory_multiresistance method
-     * description: Calcul a number between 0.5 and 2
+     * description: Calcule a number between 0.5 and 2
      * precondition: None
      * Postcondition: Does not affect global variables.
      * 
@@ -38,31 +39,10 @@ public class calculadoraGimpact {
 
     public static String choice; // varible for the election in the differents reactions
 
-    /*
-     * base_damage_method {
-     * Description: The method is responsible for calculating base damage through
-     * character attack, critical damage probability, and entered percentage of
-     * critical damage.
-     * Precondition: The method receives 3 variables and returns a result without
-     * affecting global variables.
-     * Postcondition: Does not affect global variables.
-     * 
-     * @param <character_attack> A float-type variable whose assignment has already
-     * occurred.
-     * 
-     * @param <critical_damage_probability> A float-type variable whose assignment
-     * has already occurred.
-     * 
-     * @param <critical_damage_percentage> A float-type variable whose assignment
-     * has already occurred.
-     * 
-     * @return base_damage A float-type variable, the result of the operation using
-     * the input data character_attack, critical_damage_probability, and
-     * critical_damage_percentage.
-     */
-    public static double base_damage() {
+    // ----------------------------------------------------------------
 
-        boolean cut = true;
+    // ----------------------------------------------------------------
+    public static void charact_attack() {
         while (cut) {
             System.out.println("Enter the character attack");
             if (txt.hasNextDouble()) {
@@ -80,7 +60,9 @@ public class calculadoraGimpact {
                 continue;
             }
         }
-        cut = true;
+    }
+
+    public static void probability_critical() {
         while (cut) {
             System.out.println("Enter the probability of critical damage");
             if (txt.hasNextDouble()) {
@@ -98,7 +80,9 @@ public class calculadoraGimpact {
                 continue;
             }
         }
-        cut = true;
+    }
+
+    public static void critical_percentage() {
         while (cut) {
             System.out.println("Enter the critical damage percentage");
             if (txt.hasNextDouble()) {
@@ -110,53 +94,14 @@ public class calculadoraGimpact {
                 } else {
                     cut = false;
                 }
-
             } else {
                 System.out.println("Invalid input. Please enter a valid number.");
                 txt.next();
             }
-
         }
-
-        var_basedamage = character_attack * (1 + critical_damage_probability +
-                critical_damage_percentage);
-        return var_basedamage;
     }
-    /*
-     * Transformative Damage Method {
-     * Description: This method calculates the %bonusEM (Elemental Mastery bonus
-     * percentage)
-     * based on the previously entered Elemental Mastery. Additionally, with the
-     * character's level, chosen transformative multiplier,
-     * and resistance multiplier, it calculates the transformative damage.
-     * Furthermore, a switch statement is used to obtain the value of the previously
-     * entered transformative multiplier.
-     * Precondition: The method receives 4 variables and returns a result that
-     * affects the global variable total_damage.
-     * Postcondition: Affects the global variable total_damage.
-     * 
-     * @param <transform_multiplier> A float-type variable with an already assigned
-     * value.
-     * 
-     * @param <character_level> An int-type variable with an already assigned value.
-     * 
-     * @param <resistance_multiplier> A float-type variable with an already assigned
-     * value.
-     * 
-     * @param <elemental_mastery> A float-type variable with an already assigned
-     * value.
-     * 
-     * @param <choice> A string-type variable with the response indicating the
-     * desired type of transformative multiplier.
-     * 
-     * @return transformative_damage A float-type variable, the result of the
-     * operation using the input data transform_multiplier,
-     * character_level, resistance_multiplier, elemental_mastery, and choice.
-     */
 
-    public static double transformative_damage() {
-
-        cut = true;
+    public static void elem_mastery() {
         while (cut == true) { // loop for obligate the user to put a correct value
             System.out.println("Enter the elemental mastery");
             if (txt.hasNextDouble()) { // "txt.hasNextDouble" detect if the value is a double, and if is true realize
@@ -176,7 +121,10 @@ public class calculadoraGimpact {
                 continue;
             }
         }
-        cut = true;
+
+    }
+
+    public static void charac_level() {
         while (cut == true) {
             System.out.println("Enter the character level");
             if (txt.hasNextDouble()) {
@@ -194,22 +142,23 @@ public class calculadoraGimpact {
                 continue;
             }
         }
+    }
 
-        cut = true;
-        String choice;
+    public static void transformative_multiplier() {
         while (cut == true) {
 
-            System.out.println("What type of transformation multiplier do you want to use?");
-            System.out.println("1. Burn");
-            System.out.println("2. Superconductor");
-            System.out.println("3. Whirlwind");
-            System.out.println("4. Electrocharged");
-            System.out.println("5. Crystallization");
-            System.out.println("6. Overloaded");
-            System.out.println("7. Overblossom");
-            System.out.println("8. Overblossom and Superburn");
+            System.out.println("What type of transformation multiplier do you want to use?\n" +
+                    "1. Burn\n" +
+                    "2. Superconductor\n" +
+                    "3. Whirlwind\n" +
+                    "4. Electrocharged\n" +
+                    "5. Crystallization\n" +
+                    "6. Overloaded\n" +
+                    "7. Overblossom\n" +
+                    "8. Overblossom and Superburn");
 
             txt.nextLine();
+            String choice;
             choice = txt.nextLine();
 
             switch (choice) {
@@ -251,72 +200,10 @@ public class calculadoraGimpact {
             break;
         }
 
-        System.out.println("Selected multiplier transformation: " + multiplier_eleccion); // operation of the
-                                                                                          // transformative damage
-                                                                                          // calculation
-        bonoME = 16 * (elemental_mastery / (elemental_mastery + 1400));
-        var_transformativedamage = multiplier_eleccion * character_level
-                * ((1 + bonoME) * calculadoraGimpact.aleatory_multiresistance());
-        System.out.println("damage for character: " + Math.round(var_transformativedamage));// print the damage but
-                                                                                            // aproximated
-
-        return var_transformativedamage;
-
     }
 
-    /*
-     * amplificative_damage_method {
-     * Description: This method calculates the %bonusME based on the previously
-     * entered elemental mastery.
-     * Additionally, using the reaction multiplier and %bonusME, along with the
-     * previously calculated amplification multiplier plus the base damage,
-     * it computes the amplificative damage.
-     * Furthermore, a switch statement is used to obtain the value of the previously
-     * entered amplificative multiplier.
-     * Precondition: The method receives 3 variables and returns a result that
-     * affects the global variable total_damage.
-     * Postcondition: Affects the global variable total_damage.
-     * 
-     * @param <amplification_multiplier> A float-type variable with an already
-     * assigned value.
-     * 
-     * @param <reaction_multiplier> A float-type variable with an already assigned
-     * value.
-     * 
-     * @param <elemental_mastery> A float-type variable with an already assigned
-     * value.
-     * 
-     * @param <choice> A string-type variable with the response indicating the
-     * desired type of amplificative multiplier.
-     * 
-     * @return amplificative_damage A float-type variable, the result of the
-     * operation using the input data elemental_mastery, amplification_multiplier,
-     * and reaction_multiplier.
-     * }
-     */
-    public static double amplificative_damage() {
-        boolean cut = true; // for star the loop
-        // the code have differetsloop while for obligate the user to put corrects
-        // values, and start since the same part of code, not since the beginning
-        while (cut) {
-            System.out.println("Enter the elemental mastery");
-            if (txt.hasNextDouble()) {
-                elemental_mastery = txt.nextDouble();
+    public static void amplificative_multiplier() {
 
-                if (elemental_mastery < 0) {
-                    System.out.println("Please enter a positive number.");
-                    continue;
-                } else {
-                    cut = false; // for close the loop and continue
-                }
-            } else {
-                System.out.println("Invalid input. Please enter a valid number.");
-                txt.next();
-                continue;
-            }
-            txt.nextLine();
-        }
-        cut = true; // for start again the loop
         while (cut) {
 
             System.out
@@ -341,91 +228,9 @@ public class calculadoraGimpact {
             }
         }
 
-        System.out.println("Selected amplificative multiplier : " + reaction_multiplier);
-        bonoME = 2.78 * (elemental_mastery * (elemental_mastery + 1400)); // operation of the amplificative damage
-                                                                          // calculation
-        multiampli = reaction_multiplier * (1 + bonoME);
-        var_amplificativedamage = (base_damage() * multiampli);
-        System.out.println("damage for character: " + Math.round(var_amplificativedamage));// print the damage but
-                                                                                           // aproximated
-
-        return var_amplificativedamage;
-
     }
 
-    /*
-     * additive_damage_method {
-     * Description: This method calculates the %bonusME based on the previously
-     * entered elemental mastery. Additionally,
-     * using the additive multiplier, %bonusME, character level, and resistance
-     * multiplier, it computes the additive damage.
-     * Furthermore, a switch statement is used to obtain the value of the previously
-     * entered additive multiplier.
-     * Precondition: The method receives 4 variables and returns a result that
-     * affects the global variable total_damage.
-     * Postcondition: Affects the global variable total_damage.
-     * 
-     * @param <additive_multiplier> A float-type variable with an already assigned
-     * value.
-     * 
-     * @param <resistance_multiplier> A float-type variable with an already assigned
-     * value.
-     * 
-     * @param <character_level> An int-type variable with an already assigned value.
-     * 
-     * @param <elemental_mastery> A float-type variable with an already assigned
-     * value.
-     * 
-     * @param <choice> A string-type variable with the response indicating the
-     * desired type of additive multiplier
-     * 
-     * @return additive_damage A float-type variable, the result of the operation
-     * using the input data additive_multiplier,
-     * resistance_multiplier, character_level, and elemental_mastery.
-     * }*
-     * 
-     * 
-     */
-    public static double additive_damage() {
-        boolean cut = true;
-        while (cut) {
-            System.out.println("Enter the elemental mastery");
-            if (txt.hasNextDouble()) {
-                elemental_mastery = txt.nextDouble();
-
-                if (elemental_mastery < 0) {
-                    System.out.println("Please enter a positive number.");
-                    continue;
-                } else {
-                    cut = false;
-                }
-            } else {
-                System.out.println("Invalid input. Please enter a valid number.");
-                txt.next();
-                continue;
-            }
-
-        }
-        cut = true;
-        while (cut) {
-            System.out.println("Enter the character level");
-            if (txt.hasNextDouble()) {
-                character_level = txt.nextDouble();
-
-                if (character_level < 0) {
-                    System.out.println("Please enter a positive number.");
-                    continue;
-                } else {
-                    cut = false;
-                }
-            } else {
-                System.out.println("Invalid input. Please enter a valid number.");
-                txt.next();
-                continue;
-            }
-            txt.nextLine();
-        }
-        cut = true;
+    public static void additive_multiplier() {
         while (cut) {
 
             System.out
@@ -450,7 +255,159 @@ public class calculadoraGimpact {
             }
 
         }
+    }
 
+    // ----------------------------------------------------------------
+
+    // ----------------------------------------------------------------
+
+    /*
+     * base_damage_method {
+     * Description: The method is responsible for calculating base damage through
+     * character attack, critical damage probability, and entered percentage of
+     * critical damage.
+     * Precondition: The method receives 3 variables and returns a result without
+     * affecting global variables.
+     * Postcondition: Does not affect global variables.
+     * 
+     * @return base_damage A float-type variable, the result of the operation using
+     * the input data character_attack, critical_damage_probability, and
+     * critical_damage_percentage.
+     */
+    public static double base_damage() {
+        cut = true;
+        charact_attack();
+        cut = true;
+        probability_critical();
+        cut = true;
+        critical_percentage();
+
+        return calc_base_damage(character_attack, critical_damage_probability, critical_damage_percentage);
+    }
+
+    public static double calc_base_damage(double character_attack, double critical_damage_probability,
+            double critical_damage_percentage) {
+
+        var_basedamage = character_attack * (1 + critical_damage_probability + critical_damage_percentage);
+        return var_basedamage;
+    }
+
+    /*
+     * Transformative Damage Method {
+     * 
+     * Description: This method calculates the %bonusEM (Elemental Mastery bonus
+     * percentage)
+     * based on the previously entered Elemental Mastery. Additionally, with the
+     * character's level, chosen transformative multiplier,
+     * and resistance multiplier, it calculates the transformative damage.
+     * Furthermore, a switch statement is used to obtain the value of the previously
+     * entered transformative multiplier.
+     * Precondition: The method receives 4 variables and returns a result that
+     * affects the global variable total_damage.
+     * Postcondition: Affects the global variable total_damage.
+     * 
+     * @return transformative_damage A float-type variable, the result of the
+     * operation using the input data transform_multiplier,
+     * character_level, trasformative_multiplier, elemental_mastery, and choice.
+     */
+
+    public static double transformative_damage() {
+
+        cut = true;
+        elem_mastery();
+        cut = true;
+        charac_level();
+        cut = true;
+        transformative_multiplier();
+        return calc_transformative_damage(elemental_mastery, character_level, multiplier_eleccion);
+    }
+
+    public static double calc_transformative_damage(double elemental_mastery, double character_level,
+            double multiplier_eleccion) {
+        System.out.println("Selected multiplier transformation: " + multiplier_eleccion);
+
+        bonoME = 16 * (elemental_mastery / (elemental_mastery + 1400)); //
+        var_transformativedamage = multiplier_eleccion * character_level
+                * ((1 + bonoME) * aleatory_multiresistance());
+
+        System.out.println("damage for character: " + Math.round(var_transformativedamage));// print the damage but
+                                                                                            // aproximated
+
+        return var_transformativedamage;
+    }
+
+    /*
+     * amplificative_damage_method {
+     * Description: This method calculates the %bonusME based on the previously
+     * entered elemental mastery.
+     * Additionally, using the reaction multiplier and %bonusME, along with the
+     * previously calculated amplification multiplier plus the base damage,
+     * it computes the amplificative damage.
+     * Furthermore, a switch statement is used to obtain the value of the previously
+     * entered amplificative multiplier.
+     * Precondition: The method receives 3 variables and returns a result that
+     * affects the global variable total_damage.
+     * Postcondition: Affects the global variable total_damage.
+     * 
+     * @return amplificative_damage A float-type variable, the result of the
+     * operation using the input data elemental_mastery, amplification_multiplier,
+     * and reaction_multiplier.
+     * }
+     */
+    public static double amplificative_damage() {
+        cut = true;
+        elem_mastery();
+        cut = true; // for start again the loop
+        amplificative_multiplier();
+        return calc_amplificative_damage(elemental_mastery, reaction_multiplier,
+                bonoME);
+    }
+
+    public static double calc_amplificative_damage(double elemental_mastery, double reaction_multiplier,
+            double bonoME) {
+        System.out.println("Selected amplificative multiplier : " + reaction_multiplier);
+        bonoME = 2.78 * (elemental_mastery * (elemental_mastery + 1400)); // operation of the amplificative damage
+                                                                          // calculation
+        multiampli = reaction_multiplier * (1 + bonoME);
+        var_amplificativedamage = (base_damage() * multiampli);
+        System.out.println("damage for character: " + Math.round(var_amplificativedamage));// print the damage but
+                                                                                           // aproximated
+
+        return var_amplificativedamage;
+
+    }
+
+    /*
+     * additive_damage_method {
+     * Description: This method calculates the %bonusME based on the previously
+     * entered elemental mastery. Additionally,
+     * using the additive multiplier, %bonusME, character level, and resistance
+     * multiplier, it computes the additive damage.
+     * Furthermore, a switch statement is used to obtain the value of the previously
+     * entered additive multiplier.
+     * Precondition: The method receives 4 variables and returns a result that
+     * affects the global variable total_damage.
+     * Postcondition: Affects the global variable total_damage.
+     * 
+     * @return additive_damage A float-type variable, the result of the operation
+     * using the input data additive_multiplier,
+     * trasformative_multiplier, character_level, and elemental_mastery.
+     * }*
+     * 
+     * 
+     */
+    public static double additive_damage() {
+        cut = true;
+        elem_mastery();
+        cut = true;
+        charac_level();
+        cut = true;
+        additive_multiplier();
+        return calc_additive_damage(elemental_mastery, multiplier_eleccion, character_level);
+    }
+
+    public static double calc_additive_damage(double elemental_mastery, double multiplier_eleccion,
+            double character_level) {
         System.out.println("Selected additive multiplier : " + multiplier_eleccion);
         bonoME = (elemental_mastery * (elemental_mastery + 1200)); // calculate the additive damage
         var_additivedamage = (multiplier_eleccion * character_level * (1 + bonoME)
@@ -473,7 +430,7 @@ public class calculadoraGimpact {
      * 
      * @return <> print in screen the last 10 damages in the list
      */
-    public static void saving_damage() {
+    public static void saving_damage() { // modificadora
         int i = 0;
 
         if (damages.size() == 0) {
@@ -481,14 +438,16 @@ public class calculadoraGimpact {
             return;
         } else if (damages.size() <= 10) {
             for (i = 0; i < damages.size(); i++) {
-                System.out.println("\n Damage " + i + ": " + Math.round(damages.get(i))); // print the damages of the
-                                                                                          // list (aproximated)
+                System.out.println("\n Damage " + (i + 1) + ": " + Math.round(damages.get(i))); // print the damages of
+                                                                                                // the
+                // list (aproximated)
             }
 
         } else {
             for (i = (damages.size() - 10); i < damages.size(); i++) {
-                System.out.println(" Damage " + i + ": " + Math.round(damages.get(i))); // print the las 10 damages of
-                                                                                        // the list (aproximated)
+                System.out.println(" Damage " + (i + 1) + ": " + Math.round(damages.get(i))); // print the las 10
+                                                                                              // damages of
+                // the list (aproximated)
             }
 
         }
@@ -509,7 +468,7 @@ public class calculadoraGimpact {
      * @return <> print in screen the highest damage value registered in the list
      * "damages"
      */
-    public static Double calc_highestdamage() {
+    public static double calc_highestdamage() { // analizadora
         highestdamage = 0;
         for (int i = 0; i < damages.size(); i++) {
 
@@ -525,10 +484,11 @@ public class calculadoraGimpact {
     }
 
     public static void main(String[] args) {
-        // Scanner txt = new Scanner(System.in);
-        System.out.println("welcome to genshin calculator");
         boolean cut = true;
 
+        // Scanner txt = new Scanner(System.in);
+        System.out.println("welcome to genshin calculator");
+        cut = true;
         while (cut) {
             System.out.println(
                     "what action you want to do... \n 1. calculate damage \n 2. see the last 10 damages \n 3. calculate the hightest damage \n 0. Exit");
