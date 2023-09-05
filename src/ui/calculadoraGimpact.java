@@ -194,7 +194,8 @@ public class calculadoraGimpact {
                     cut = false;
                     break;
                 default:
-                    System.out.println("Invalid choice. Please select a valid option.");
+                    System.out.println("Invalid choice. Please select a valid option.\n" + //
+                            "");
             }
             break;
         }
@@ -224,6 +225,8 @@ public class calculadoraGimpact {
                     break;
                 default:
                     cut = true;
+                    System.out.println("Invalid choice. Please select a valid option.\n" + //
+                            "");
 
             }
         }
@@ -253,6 +256,8 @@ public class calculadoraGimpact {
                     break;
                 default:
                     cut = true;
+                    System.out.println("Invalid choice. Please select a valid option.\n" + //
+                            "");
 
             }
 
@@ -478,8 +483,9 @@ public class calculadoraGimpact {
                 highestdamage = damages.get(i);
             }
         }
-        System.out.println("the highestdamage is " + Math.round(highestdamage)); // print the highest damage
-                                                                                 // (aproximated)
+        System.out.println("the highestdamage for the moment is " + Math.round(highestdamage)); // print the highest
+                                                                                                // damage
+        // (aproximated)
         System.out.println("\n");
         System.out.println("\n");
         return highestdamage;
@@ -493,7 +499,7 @@ public class calculadoraGimpact {
         cut = true;
         while (cut) {
             System.out.println(
-                    "what action you want to do... \n 1. calculate damage \n 2. see the last 10 damages \n 3. calculate the hightest damage \n 0. Exit");
+                    "what action you want to do... \n 1. calculate damage \n 2. see the last 10 damages \n 3. see the hightest damage \n 0. Exit");
             // main
             options_menu = txt.nextInt();
             switch (options_menu) { // depending on the action you select, realize a different action
