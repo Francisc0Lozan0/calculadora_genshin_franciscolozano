@@ -2,18 +2,18 @@ package ui;
 
 import java.util.*;
 
-public class calculadoraGimpact {
+public class CalculadoraGimpact {
 
     public static Scanner txt = new Scanner(System.in);
-    public static boolean cut; // creating varibales type boolean
+    public static boolean cut; // creating variables type boolean
 
-    public static int options_menu, character, count2, count_reaccions; // creating variables that contain int values
+    public static int options_menu, character, count2, count_reactions; // creating variables that contain int values
 
     public static List<Double> damages = new ArrayList<>(); // the list of the damages
 
     /*
      * aleatory_multiresistance method
-     * description: Calcule a number between 0.5 and 2
+     * description: Calculate a number between 0.5 and 2
      * precondition: None
      * Postcondition: Does not affect global variables.
      * 
@@ -32,11 +32,11 @@ public class calculadoraGimpact {
     }
 
     public static double character_attack, character_level, critical_damage_probability,
-            critical_damage_percentage, elemental_mastery, reaction_multiplier, multiplier_eleccion, var_basedamage,
+            critical_damage_percentage, elemental_mastery, reaction_multiplier, multiplier_election, var_basedamage,
             var_transformativedamage, bonoME, multiampli, var_amplificativedamage, var_additivedamage, total_damage,
-            damage, highestdamage; // generating the varibles with double values
+            damage, highestdamage; // generating the variables with double values
 
-    public static String choice; // varible for the election in the differents reactions
+    public static String choice; // variable for the election in the different reactions
 
     // ----------------------------------------------------------------
 
@@ -144,8 +144,9 @@ public class calculadoraGimpact {
     }
 
     public static void transformative_multiplier() {
-        while (cut == true) {
+        txt.nextLine();
 
+        while (cut == true) {
             System.out.println("What type of transformation multiplier do you want to use?\n" +
                     "1. Burn\n" +
                     "2. Superconductor\n" +
@@ -156,48 +157,47 @@ public class calculadoraGimpact {
                     "7. Overblossom\n" +
                     "8. Overblossom and Superburn");
 
-            txt.nextLine();
             String choice;
             choice = txt.nextLine();
 
             switch (choice) {
                 case "1":
-                    multiplier_eleccion = 0.25;
+                    multiplier_election = 0.25;
                     cut = false;
                     break;
                 case "2":
-                    multiplier_eleccion = 0.50;
+                    multiplier_election = 0.50;
                     cut = false;
                     break;
                 case "3":
-                    multiplier_eleccion = 0.6;
+                    multiplier_election = 0.6;
                     cut = false;
                     break;
                 case "4":
-                    multiplier_eleccion = 1.2;
+                    multiplier_election = 1.2;
                     cut = false;
                     break;
                 case "5":
-                    multiplier_eleccion = 1.5;
+                    multiplier_election = 1.5;
                     cut = false;
                     break;
                 case "6":
-                    multiplier_eleccion = 2.0;
+                    multiplier_election = 2.0;
                     cut = false;
                     break;
                 case "7":
-                    multiplier_eleccion = 2.0;
+                    multiplier_election = 2.0;
                     cut = false;
                     break;
                 case "8":
-                    multiplier_eleccion = 3.0;
+                    multiplier_election = 3.0;
                     cut = false;
                     break;
                 default:
                     System.out.println("Invalid choice. Please select a valid option.\n" + //
                             "");
+                    continue;
             }
-            break;
         }
 
     }
@@ -209,7 +209,7 @@ public class calculadoraGimpact {
 
             System.out
                     .println(
-                            "What type of amplificative multiplier do you want to use? \n 1. Vaporization \n 2. Melting");
+                            "What type of amplification multiplier do you want to use? \n 1. Vaporization \n 2. Melting");
 
             choice = txt.nextLine();
             switch (choice) {
@@ -246,12 +246,12 @@ public class calculadoraGimpact {
             switch (choice) {
                 case "1":
                     //
-                    multiplier_eleccion = 1.15;
+                    multiplier_election = 1.15;
                     cut = false;
                     break;
                 case "2":
                     //
-                    multiplier_eleccion = 1.25;
+                    multiplier_election = 1.25;
                     cut = false;
                     break;
                 default:
@@ -326,19 +326,19 @@ public class calculadoraGimpact {
         charac_level();
         cut = true;
         transformative_multiplier();
-        return calc_transformative_damage(elemental_mastery, character_level, multiplier_eleccion);
+        return calc_transformative_damage(elemental_mastery, character_level, multiplier_election);
     }
 
     public static double calc_transformative_damage(double elemental_mastery, double character_level,
-            double multiplier_eleccion) {
-        System.out.println("Selected multiplier transformation: " + multiplier_eleccion);
+            double multiplier_election) {
+        System.out.println("Selected multiplier transformation: " + multiplier_election);
 
         bonoME = 16 * (elemental_mastery / (elemental_mastery + 1400)); //
-        var_transformativedamage = multiplier_eleccion * character_level
+        var_transformativedamage = multiplier_election * character_level
                 * ((1 + bonoME) * aleatory_multiresistance());
 
         System.out.println("damage for character: " + Math.round(var_transformativedamage));// print the damage but
-                                                                                            // aproximated
+                                                                                            // approximated
 
         return var_transformativedamage;
     }
@@ -378,7 +378,7 @@ public class calculadoraGimpact {
         multiampli = reaction_multiplier * (1 + bonoME);
         var_amplificativedamage = (base_damage() * multiampli);
         System.out.println("damage for character: " + Math.round(var_amplificativedamage));// print the damage but
-                                                                                           // aproximated
+                                                                                           // approximated
 
         return var_amplificativedamage;
 
@@ -410,17 +410,17 @@ public class calculadoraGimpact {
         charac_level();
         cut = true;
         additive_multiplier();
-        return calc_additive_damage(elemental_mastery, multiplier_eleccion, character_level);
+        return calc_additive_damage(elemental_mastery, multiplier_election, character_level);
     }
 
-    public static double calc_additive_damage(double elemental_mastery, double multiplier_eleccion,
+    public static double calc_additive_damage(double elemental_mastery, double multiplier_election,
             double character_level) {
-        System.out.println("Selected additive multiplier : " + multiplier_eleccion);
+        System.out.println("Selected additive multiplier : " + multiplier_election);
         bonoME = (elemental_mastery * (elemental_mastery + 1200)); // calculate the additive damage
-        var_additivedamage = (multiplier_eleccion * character_level * (1 + bonoME)
+        var_additivedamage = (multiplier_election * character_level * (1 + bonoME)
                 * aleatory_multiresistance());
         System.out.println("damage for character: " + Math.round(var_additivedamage));// print the damage but
-                                                                                      // aproximated
+                                                                                      // approximated
 
         return var_additivedamage;
     }
@@ -447,14 +447,14 @@ public class calculadoraGimpact {
             for (i = 0; i < damages.size(); i++) {
                 System.out.println("\n Damage " + (i + 1) + ": " + Math.round(damages.get(i))); // print the damages of
                                                                                                 // the
-                // list (aproximated)
+                // list (approximated)
             }
 
         } else {
             for (i = (damages.size() - 10); i < damages.size(); i++) {
                 System.out.println(" Damage " + (i + 1) + ": " + Math.round(damages.get(i))); // print the las 10
                                                                                               // damages of
-                // the list (aproximated)
+                // the list (approximated)
             }
 
         }
@@ -465,10 +465,11 @@ public class calculadoraGimpact {
 
     /*
      * calc_highestdamage method
-     * description: Calcul the highest damage value in the list "damages" and print
+     * description: Calculate the highest damage value in the list "damages" and
+     * print
      * it in the output
      * precondition: the list "damages"
-     * postcondition: Dont affect global variables
+     * postcondition: Don´t affect global variables
      * 
      * @param <list.damages> the list that contains the damage
      * 
@@ -495,7 +496,7 @@ public class calculadoraGimpact {
         boolean cut = true;
 
         // Scanner txt = new Scanner(System.in);
-        System.out.println("welcome to genshin calculator");
+        System.out.println("welcome to Genshin calculator");
         cut = true;
         while (cut) {
             System.out.println(
@@ -519,20 +520,20 @@ public class calculadoraGimpact {
                             System.out.println("\n");
                             System.out.println(
                                     "what type of reaction use your character \n 1. transformative \n 2. amplificative \n 3. additive");
-                            count_reaccions = txt.nextInt();
-                            if (count_reaccions == 1) {
+                            count_reactions = txt.nextInt();
+                            if (count_reactions == 1) {
                                 System.out.println("\n");
                                 System.out.println("\n");
                                 System.out.println("Calculating transformative damage for character " + character);
 
                                 damage = transformative_damage();
 
-                            } else if (count_reaccions == 2) {
+                            } else if (count_reactions == 2) {
                                 System.out.println("Calculating amplificative damage for character " + character);
 
                                 damage = amplificative_damage();
 
-                            } else if (count_reaccions == 3) {
+                            } else if (count_reactions == 3) {
                                 System.out.println("Calculating additive damage for character " + character);
 
                                 damage = additive_damage();
