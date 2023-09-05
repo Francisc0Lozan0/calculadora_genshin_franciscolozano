@@ -202,6 +202,7 @@ public class calculadoraGimpact {
     }
 
     public static void amplificative_multiplier() {
+        txt.nextLine();
 
         while (cut) {
 
@@ -230,6 +231,8 @@ public class calculadoraGimpact {
     }
 
     public static void additive_multiplier() {
+        txt.nextLine();
+
         while (cut) {
 
             System.out
@@ -565,10 +568,10 @@ public class calculadoraGimpact {
                     System.out.println("Exiting");
                     System.out.println("\n");
                     cut = false; // for close
-
             }
             txt.nextLine();
         }
+
     }
 
 }
